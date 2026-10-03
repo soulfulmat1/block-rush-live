@@ -142,5 +142,16 @@ let wake;async function awake(){try{if(navigator.wakeLock&&document.visibilitySt
 const api={getState:()=>({round,mode:modes[mode],remaining,phase,paused,audio:sound.state(),alive:bots.filter(b=>b.alive).length,scores:[...scores],tileCount:tiles.length,particleCount:particles.length}),nextRound:reset,setPaused(value){if(typeof value!=='boolean')throw Error('paused must be boolean');if(paused!==value)togglePause();return this.getState();}};window.blockRush=api;
 if(document.modelContext?.registerTool){for(const tool of [{name:'get_tournament_state',description:'Read the current autonomous tournament state.',inputSchema:{type:'object',properties:{},additionalProperties:false},annotations:{readOnlyHint:true},execute:()=>api.getState()},{name:'set_tournament_paused',description:'Pause or resume the same simulation controlled by the on-screen pause button.',inputSchema:{type:'object',properties:{paused:{type:'boolean'}},required:['paused'],additionalProperties:false},execute:input=>api.setPaused(input.paused)}])try{Promise.resolve(document.modelContext.registerTool(tool)).catch(()=>{});}catch{}}
 reset();$('#boot').remove();function frame(stamp){if(!last)last=stamp;const dt=Math.min((stamp-last)/1000,.05);last=stamp;if(!paused)update(dt);render();requestAnimationFrame(frame);}requestAnimationFrame(frame);
+// AUTO ENABLE SOUND FOR YOUTUBE LIVE
+setTimeout(() => {
+  const soundButton = document.getElementById('sound');
+
+  if (
+    soundButton &&
+    soundButton.getAttribute('aria-pressed') !== 'true'
+  ) {
+    soundButton.click();
+  }
+}, 2000);
 })();
 </script></body></html>
