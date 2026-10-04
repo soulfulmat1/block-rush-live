@@ -24,7 +24,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          Xvfb :99 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset &
+          Xvfb :99 -screen 0 1080x1920x24 -ac +extension GLX +render -noreset &
 
           pulseaudio --start
           sleep 2
@@ -42,7 +42,7 @@ jobs:
             --disable-gpu \
             --autoplay-policy=no-user-gesture-required \
             --window-position=0,0 \
-            --window-size=1920,1080 \
+            --window-size=1080,1920 \
             --kiosk \
             https://soulfulmat1.github.io/block-rush-live/ &
 
@@ -76,7 +76,7 @@ jobs:
             ffmpeg \
               -f x11grab \
               -framerate 30 \
-              -video_size 1920x1080 \
+              -video_size 1080x1920 \
               -i :99.0 \
               -f pulse \
               -i GameAudio.monitor \
